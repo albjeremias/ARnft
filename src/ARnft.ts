@@ -73,7 +73,7 @@ export default class ARnft {
      * @param height (number) the height in pixels of the video camera.
      * @param configUrl (string) the url of the config.json file
      */
-    constructor(width: number, height: number, configUrl: string) {
+    load(width: number, height: number, configUrl: string) {
         this.width = width;
         this.height = height;
         this.configUrl = configUrl;
@@ -81,6 +81,23 @@ export default class ARnft {
         this.uuid = uuidv4();
         this.version = version;
         console.log("ARnft ", this.version);
+    }
+
+    static initPromises(
+        width: number,
+        height: number,
+        markerUrls: Array<string>,
+        names: Array<string>,
+        configs: string,
+        stats: boolean
+    ): Promise<object> {
+
+        // const _arnft = new ARnft();
+        // _arnft.load(width, height, configUrl);
+        // return await _arnft._initialize(markerUrls, names, stats).catch((error: any) => {
+            // console.error(error);
+        return Promise.reject(false);
+        // });
     }
 
     /**
@@ -103,7 +120,8 @@ export default class ARnft {
         configUrl: string,
         stats: boolean
     ): Promise<object> {
-        const _arnft = new ARnft(width, height, configUrl);
+        const _arnft = new ARnft();
+        _arnft.load(width, height, configUrl);
         return await _arnft._initialize(markerUrls, names, stats).catch((error: any) => {
             console.error(error);
             return Promise.reject(false);
@@ -130,7 +148,8 @@ export default class ARnft {
         configUrl: string,
         stats: boolean
     ): Promise<object> {
-        const _arnft = new ARnft(width, height, configUrl);
+        const _arnft = new ARnft();
+        _arnft.load(width, height, configUrl);
         this.entities = entities;
         let markerUrls = this.entities.map((entity) => {
             return entity.markerUrl;
