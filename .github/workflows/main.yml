@@ -36,6 +36,8 @@ jobs:
           git branch --delete --force dist
           git checkout --orphan dist
           git add -f dist
+          git config --local user.name "${GITHUB_ACTOR}"
+          git config --local user.email "${GITHUB_ACTOR}@github.com"
           git commit -m "Rebuild dist folder [github-ci]"
           git push -f origin dist
       - name: Publish if version has been updated
